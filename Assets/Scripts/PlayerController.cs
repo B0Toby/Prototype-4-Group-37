@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("Tilemaps")]
     public Tilemap wallTilemap;
+    public Tilemap obstacleTilemap;
 
     private Vector3Int cellPos;
 
@@ -57,8 +58,9 @@ public class PlayerController : MonoBehaviour
 
     private bool IsBlocked(Vector3Int cell)
     {
-        if (wallTilemap == null) return false;
-        return wallTilemap.HasTile(cell);
+        bool wallBlocked = wallTilemap != null && wallTilemap.HasTile(cell);
+        bool obstacleBlocked = obstacleTilemap != null && obstacleTilemap.HasTile(cell);
+        return wallBlocked || obstacleBlocked;
     }
 
     public Vector3Int GetCellPosition()

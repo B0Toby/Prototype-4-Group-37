@@ -166,9 +166,13 @@ public class ThrowPotion : MonoBehaviour
 
         foreach (var hit in hits)
         {
-            Debug.Log($"{selectedPotion.potionName} HIT entity: {hit.gameObject.name} at tile {targetCell}");    // for now i made it so you hit anything within the highlighted range
-                                                                                            // but maybe make it so you can only hit one tile??
+            Debug.Log($"{selectedPotion.potionName} HIT entity: {hit.gameObject.name} at tile {targetCell}");
+
+            NpcController npc = hit.GetComponent<NpcController>();
+            if (npc != null)
+            {
+                npc.ApplyPotion(selectedPotion.turns);
+            }
         }
     }
-
 }

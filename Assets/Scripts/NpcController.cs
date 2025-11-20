@@ -7,60 +7,136 @@ public class NpcController : MonoBehaviour
     public Grid grid;
 
     [Header("Tilemaps")]
-    public Tilemap wallTilemap;
+    public Tilemap wallTilemap;       // permanent walls
+    public Tilemap obstacleTilemap;   // boxes (Tilemap_Obstacles)
 
-    [Header("Patrol between two cells")]
-    public Vector3Int patrolCellA;
-    public Vector3Int patrolCellB;
-    private Vector3Int currentTarget;
+    [Header("Pacified visuals")]
+    public Sprite pacifiedSprite;     // sprite for animal phase
 
+    [Header("Animal abilities")]
+    public bool canBreakObstacles = true; // later you can change per animal
+
+    // state
+    private bool infected = false;    // potion hit, counting down
+    private bool pacified = false;    // animal phase
+    private int turnsLeft = 0;        // turns before becoming pacified
+
+    // movement
     private Vector3Int cellPos;
+    private Vector3Int moveDir = Vector3Int.right;
+
+    private SpriteRenderer sr;
 
     private void Start()
     {
         if (grid == null)
             grid = FindFirstObjectByType<Grid>();
 
-        cellPos = patrolCellA;
+        cellPos = grid.WorldToCell(transform.position);
         transform.position = grid.GetCellCenterWorld(cellPos);
 
-        currentTarget = patrolCellB;
+        sr = GetComponent<SpriteRenderer>();
     }
 
+    // called once per player step from GameManager
     public void OnPlayerStep()
     {
-        Vector3Int step = GetStepToward(currentTarget);
-        Vector3Int nextCell = cellPos + step;
-
-        if (IsBlocked(nextCell))
+        // Stage 0: not infected, not pacified -> idle
+        if (!infected && !pacified)
             return;
 
-        cellPos = nextCell;
-        transform.position = grid.GetCellCenterWorld(cellPos);
-
-        if (cellPos == currentTarget)
+        // Stage 1: infected, counting down
+        if (infected && !pacified)
         {
-            currentTarget = (currentTarget == patrolCellA) ? patrolCellB : patrolCellA;
+            turnsLeft--;
+
+            if (turnsLeft <= 0)
+            {
+                EnterPacifiedState();
+            }
+
+            return;
+        }
+
+        // Stage 2: pacified animal movement
+        if (pacified)
+        {
+            MoveAsAnimal();
         }
     }
 
-    private Vector3Int GetStepToward(Vector3Int target)
+    // called by ThrowPotion when potion hits this NPC
+    public void ApplyPotion(int turns)
     {
-        Vector3Int diff = target - cellPos;
+        if (pacified) return; // already animal
 
-        if (diff.x > 0) return Vector3Int.right;
-        if (diff.x < 0) return Vector3Int.left;
-
-        if (diff.y > 0) return Vector3Int.up;
-        if (diff.y < 0) return Vector3Int.down;
-
-        return Vector3Int.zero;
+        infected = true;
+        turnsLeft = turns;
     }
 
-    private bool IsBlocked(Vector3Int cell)
+    private void EnterPacifiedState()
     {
-        if (wallTilemap == null) return false;
-        return wallTilemap.HasTile(cell);
+        infected = false;
+        pacified = true;
+
+        if (sr != null && pacifiedSprite != null)
+        {
+            sr.sprite = pacifiedSprite;
+        }
+
+        moveDir = Vector3Int.right;
+    }
+
+    private void MoveAsAnimal()
+    {
+        // try current direction
+        Vector3Int tryDir = moveDir;
+        Vector3Int nextCell = cellPos + tryDir;
+
+        // check walls first
+        if (IsWall(nextCell))
+        {
+            // flip direction and try opposite in same turn
+            tryDir = -moveDir;
+            nextCell = cellPos + tryDir;
+
+            // both sides blocked by walls -> stay
+            if (IsWall(nextCell))
+            {
+                return;
+            }
+
+            moveDir = tryDir;
+        }
+
+        // check obstacles (boxes)
+        if (IsObstacle(nextCell))
+        {
+            if (canBreakObstacles)
+            {
+                // destroy the box and move through
+                obstacleTilemap.SetTile(nextCell, null);
+            }
+            else
+            {
+                // cannot pass obstacles
+                return;
+            }
+        }
+
+        // move one cell
+        cellPos = nextCell;
+        transform.position = grid.GetCellCenterWorld(cellPos);
+    }
+
+    private bool IsWall(Vector3Int cell)
+    {
+        return wallTilemap != null && wallTilemap.HasTile(cell);
+    }
+
+    private bool IsObstacle(Vector3Int cell)
+    {
+        return obstacleTilemap != null && obstacleTilemap.HasTile(cell);
     }
 
     public Vector3Int GetCellPosition()
