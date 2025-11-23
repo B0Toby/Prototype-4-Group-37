@@ -18,6 +18,9 @@ public class GameManager : MonoBehaviour
     [Header("NPCs in this level")]
     public List<NpcController> npcs = new List<NpcController>();
 
+    [Header("Animals in this level")]
+    public List<BaseAnimal> animals = new List<BaseAnimal>();
+
     [Header("End Screen UI")]
     public GameObject endScreenPanel;
     public TextMeshProUGUI endScreenText;
@@ -66,6 +69,13 @@ public class GameManager : MonoBehaviour
             if (npc != null)
                 npc.OnPlayerStep();
         }
+
+        // animals take their turns
+        foreach (var animal in animals)
+        {
+            if (animal != null)
+                animal.OnPlayerStep();
+        }
     }
 
     private void EndGame(string message)
@@ -97,4 +107,11 @@ public class GameManager : MonoBehaviour
         Scene current = SceneManager.GetActiveScene();
         SceneManager.LoadScene(current.buildIndex);
     }
+
+    // creature registration
+    public void RegisterNpc(NpcController npc) => npcs.Add(npc);
+    public void UnregisterNpc(NpcController npc) => npcs.Remove(npc);
+ 
+    public void RegisterAnimal(BaseAnimal a) => animals.Add(a);
+    public void UnregisterAnimal(BaseAnimal a) => animals.Remove(a);
 }

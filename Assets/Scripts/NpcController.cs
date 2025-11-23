@@ -9,7 +9,7 @@ public class NpcController : MonoBehaviour
     {
         Idle,
         Rage,
-        Pacify
+        Pacify      // transition state, initiate spawn animal
     }
 
     [Header("Grid reference")]
@@ -22,20 +22,17 @@ public class NpcController : MonoBehaviour
     [Header("Sprites")]
     public Sprite idleSprite;
     public Sprite rageSprite;
-    public Sprite pacifySprite;
-
-    [Header("Rage settings")]
-    public int rageMoveInterval = 2;  // move once every X player turns
-
-    [Header("Pacify settings")]
-    public bool canBreakObstacles = true;
+    //public Sprite pacifySprite;
 
     // current state
     public NpcState state = NpcState.Idle;
 
     // rage state data
+    private PotionType hitPotion;       // specified when hit with potion
+    private GameObject transformAnimal; // specified when hit with potion
     private int rageTurnsLeft = 0;
     private int rageMoveCounter = 0;
+    private int rageMoveInterval = 2;   // move once every X player turns  
 
     // position & movement
     private Vector3Int cellPos;
@@ -56,6 +53,8 @@ public class NpcController : MonoBehaviour
         {
             sr.sprite = idleSprite;
         }
+
+        GameManager.I.RegisterNpc(this);
     }
 
     // called once per player step from GameManager
@@ -74,19 +73,23 @@ public class NpcController : MonoBehaviour
                 break;
 
             case NpcState.Pacify:
-                MoveAsPacifiedAnimal();
+                TransformIntoAnimal();
                 break;
         }
     }
 
     // called by ThrowPotion when hit
-    public void ApplyPotion(int turns)
+    public void ApplyPotion(PotionType potion)
     {
+        // set new properties
+        hitPotion = potion;
+        transformAnimal = potion.animalPrefab;
+
         if (state == NpcState.Pacify)
             return;
 
         state = NpcState.Rage;
-        rageTurnsLeft = turns;
+        rageTurnsLeft = hitPotion.rageTurns;
         rageMoveCounter = 0;
 
         if (sr != null && rageSprite != null)
@@ -101,7 +104,7 @@ public class NpcController : MonoBehaviour
         rageTurnsLeft--;
         if (rageTurnsLeft <= 0)
         {
-            EnterPacifyState();
+            state = NpcState.Pacify;
             return;
         }
 
@@ -141,52 +144,22 @@ public class NpcController : MonoBehaviour
         }
     }
 
-    private void EnterPacifyState()
+    // instantiate animal prefab and destroy npc
+    private void TransformIntoAnimal()
     {
-        state = NpcState.Pacify;
+        GameObject animalObj = Instantiate(transformAnimal, transform.position, Quaternion.identity);
+        BaseAnimal animal = animalObj.GetComponent<BaseAnimal>();
 
-        if (sr != null && pacifySprite != null)
-        {
-            sr.sprite = pacifySprite;
-        }
+        if (animal != null)
+            animal.InitializeFromNpc(this);
 
-        pacifyMoveDir = Vector3Int.right;
+        Destroy(gameObject);
     }
 
-    private void MoveAsPacifiedAnimal()
+    private void OnDestroy()
     {
-        Vector3Int tryDir = pacifyMoveDir;
-        Vector3Int nextCell = cellPos + tryDir;
-
-        // walls: bounce immediately in this turn
-        if (IsWall(nextCell))
-        {
-            tryDir = -pacifyMoveDir;
-            nextCell = cellPos + tryDir;
-
-            if (IsWall(nextCell))
-            {
-                return; // blocked on both sides
-            }
-
-            pacifyMoveDir = tryDir;
-        }
-
-        // obstacles: break if allowed
-        if (IsObstacle(nextCell))
-        {
-            if (canBreakObstacles && obstacleTilemap != null)
-            {
-                obstacleTilemap.SetTile(nextCell, null);
-            }
-            else
-            {
-                return;
-            }
-        }
-
-        cellPos = nextCell;
-        transform.position = grid.GetCellCenterWorld(cellPos);
+        if (GameManager.I != null)
+            GameManager.I.UnregisterNpc(this);
     }
 
     private Vector3Int GetStepToward(Vector3Int target)

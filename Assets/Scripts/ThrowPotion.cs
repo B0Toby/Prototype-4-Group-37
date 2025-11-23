@@ -109,10 +109,10 @@ public class ThrowPotion : MonoBehaviour
         }
     }
 
-    // RIGHT CLICK to throw potion to currently displayed range (might change this control cause its a little weird)
+    // SPACE to throw potion to currently displayed range (might change this control cause its a little weird)
     void HandleThrow()
     {
-        if (!Input.GetMouseButtonDown(0)) return;
+        if (!Input.GetKeyDown(KeyCode.Space)) return;
 
         if (throwSFX != null && audioSource != null)
         {
@@ -181,7 +181,7 @@ public class ThrowPotion : MonoBehaviour
             NpcController npc = hit.GetComponent<NpcController>();
             if (npc != null)
             {
-                npc.ApplyPotion(selectedPotion.turns);
+                npc.ApplyPotion(selectedPotion);
             }
         }
     }

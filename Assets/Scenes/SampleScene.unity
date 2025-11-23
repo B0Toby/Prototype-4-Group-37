@@ -2573,9 +2573,6 @@ MonoBehaviour:
   obstacleTilemap: {fileID: 1692514}
   idleSprite: {fileID: 1426666553488855073, guid: ec421cf0cf0df3e439729a631b932f62, type: 3}
   rageSprite: {fileID: 4807775697852972887, guid: 3c11ef87803636c4b837aa813ad88f7a, type: 3}
-  pacifySprite: {fileID: -5829726057563536327, guid: 60c5715f0b184bd429a7cd0b777fabd3, type: 3}
-  rageMoveInterval: 1
-  canBreakObstacles: 1
   state: 0
 --- !u!212 &940223251
 SpriteRenderer:
@@ -2727,6 +2724,7 @@ MonoBehaviour:
   currentPlayerCell: {x: 0, y: 0, z: 0}
   npcs:
   - {fileID: 940223250}
+  animals: []
   endScreenPanel: {fileID: 1889038472}
   endScreenText: {fileID: 372672595}
 --- !u!4 &1355590248
