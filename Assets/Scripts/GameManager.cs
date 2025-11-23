@@ -1,6 +1,9 @@
 using UnityEngine;
-using TMPro;
+using UnityEngine.Tilemaps;
+using System.Collections;
 using System.Collections.Generic;
+using TMPro;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -29,6 +32,14 @@ public class GameManager : MonoBehaviour
         if (endScreenPanel != null)
         {
             endScreenPanel.SetActive(false);
+        }
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            RestartLevel();
         }
     }
 
@@ -79,5 +90,11 @@ public class GameManager : MonoBehaviour
     public void TriggerLose()
     {
         EndGame("You Lose!");
+    }
+
+    private void RestartLevel()
+    {
+        Scene current = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(current.buildIndex);
     }
 }
