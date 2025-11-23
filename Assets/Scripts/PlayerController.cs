@@ -20,6 +20,9 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        if (GameManager.I != null && GameManager.I.IsGameEnded)
+            return;
+
         Vector3Int dir = ReadInput();
         if (dir == Vector3Int.zero) return;
 

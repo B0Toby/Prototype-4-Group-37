@@ -1,4 +1,5 @@
 using UnityEngine;
+using TMPro;
 using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour
@@ -8,40 +9,75 @@ public class GameManager : MonoBehaviour
     [Header("End Cells")]
     public List<Vector3Int> endCells = new List<Vector3Int>();
 
+    [Header("Player")]
+    public Vector3Int currentPlayerCell;
+
     [Header("NPCs in this level")]
     public List<NpcController> npcs = new List<NpcController>();
 
+    [Header("End Screen UI")]
+    public GameObject endScreenPanel;
+    public TextMeshProUGUI endScreenText;
+
     private bool gameEnded = false;
+    public bool IsGameEnded => gameEnded;
 
     private void Awake()
     {
         I = this;
+
+        if (endScreenPanel != null)
+        {
+            endScreenPanel.SetActive(false);
+        }
     }
 
     public void OnPlayerMoved(Vector3Int playerCell)
     {
         if (gameEnded) return;
 
+        // store player position for NPCs (rage stage)
+        currentPlayerCell = playerCell;
+
+        // check win condition (player reaches end cell)
         foreach (var cell in endCells)
         {
             if (playerCell == cell)
             {
-                EndGame();
+                TriggerWin();
+                return;
             }
         }
 
+        // NPCs take their turns
         foreach (var npc in npcs)
         {
             if (npc != null)
-            {
                 npc.OnPlayerStep();
-            }
         }
     }
 
-    private void EndGame()
+    private void EndGame(string message)
     {
+        if (gameEnded) return;
+
         gameEnded = true;
-        Debug.Log("GG");
+        Debug.Log(message);
+
+        if (endScreenPanel != null)
+            endScreenPanel.SetActive(true);
+
+        if (endScreenText != null)
+            endScreenText.text = message;
+    }
+
+    public void TriggerWin()
+    {
+        EndGame("You Win!");
+    }
+
+    public void TriggerLose()
+    {
+        EndGame("You Lose!");
     }
 }

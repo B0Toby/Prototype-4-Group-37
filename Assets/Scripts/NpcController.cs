@@ -3,27 +3,41 @@ using UnityEngine.Tilemaps;
 
 public class NpcController : MonoBehaviour
 {
+    public enum NpcState
+    {
+        Idle,
+        Rage,
+        Pacify
+    }
+
     [Header("Grid reference")]
     public Grid grid;
 
     [Header("Tilemaps")]
-    public Tilemap wallTilemap;       // permanent walls
-    public Tilemap obstacleTilemap;   // boxes (Tilemap_Obstacles)
+    public Tilemap wallTilemap;
+    public Tilemap obstacleTilemap;
 
-    [Header("Pacified visuals")]
-    public Sprite pacifiedSprite;     // sprite for animal phase
+    [Header("Sprites")]
+    public Sprite idleSprite;
+    public Sprite rageSprite;
+    public Sprite pacifySprite;
 
-    [Header("Animal abilities")]
-    public bool canBreakObstacles = true; // later you can change per animal
+    [Header("Rage settings")]
+    public int rageMoveInterval = 2;  // move once every X player turns
 
-    // state
-    private bool infected = false;    // potion hit, counting down
-    private bool pacified = false;    // animal phase
-    private int turnsLeft = 0;        // turns before becoming pacified
+    [Header("Pacify settings")]
+    public bool canBreakObstacles = true;
 
-    // movement
+    // current state
+    public NpcState state = NpcState.Idle;
+
+    // rage state data
+    private int rageTurnsLeft = 0;
+    private int rageMoveCounter = 0;
+
+    // position & movement
     private Vector3Int cellPos;
-    private Vector3Int moveDir = Vector3Int.right;
+    private Vector3Int pacifyMoveDir = Vector3Int.right;
 
     private SpriteRenderer sr;
 
@@ -36,97 +50,159 @@ public class NpcController : MonoBehaviour
         transform.position = grid.GetCellCenterWorld(cellPos);
 
         sr = GetComponent<SpriteRenderer>();
+        if (sr != null && idleSprite != null)
+        {
+            sr.sprite = idleSprite;
+        }
     }
 
     // called once per player step from GameManager
     public void OnPlayerStep()
     {
-        // Stage 0: not infected, not pacified -> idle
-        if (!infected && !pacified)
+        if (GameManager.I != null && GameManager.I.IsGameEnded)
             return;
 
-        // Stage 1: infected, counting down
-        if (infected && !pacified)
+        switch (state)
         {
-            turnsLeft--;
+            case NpcState.Idle:
+                break;
 
-            if (turnsLeft <= 0)
-            {
-                EnterPacifiedState();
-            }
+            case NpcState.Rage:
+                HandleRageStep();
+                break;
 
-            return;
-        }
-
-        // Stage 2: pacified animal movement
-        if (pacified)
-        {
-            MoveAsAnimal();
+            case NpcState.Pacify:
+                MoveAsPacifiedAnimal();
+                break;
         }
     }
 
-    // called by ThrowPotion when potion hits this NPC
+    // called by ThrowPotion when hit
     public void ApplyPotion(int turns)
     {
-        if (pacified) return; // already animal
+        if (state == NpcState.Pacify)
+            return;
 
-        infected = true;
-        turnsLeft = turns;
+        state = NpcState.Rage;
+        rageTurnsLeft = turns;
+        rageMoveCounter = 0;
+
+        if (sr != null && rageSprite != null)
+        {
+            sr.sprite = rageSprite;
+        }
     }
 
-    private void EnterPacifiedState()
+    private void HandleRageStep()
     {
-        infected = false;
-        pacified = true;
-
-        if (sr != null && pacifiedSprite != null)
+        // rage lasts a limited number of player turns
+        rageTurnsLeft--;
+        if (rageTurnsLeft <= 0)
         {
-            sr.sprite = pacifiedSprite;
+            EnterPacifyState();
+            return;
         }
 
-        moveDir = Vector3Int.right;
+        // only move every rageMoveInterval turns
+        rageMoveCounter++;
+        if (rageMoveCounter < rageMoveInterval)
+        {
+            return;
+        }
+        rageMoveCounter = 0;
+
+        if (GameManager.I == null)
+            return;
+
+        // move 1 step toward player
+        Vector3Int playerCell = GameManager.I.currentPlayerCell;
+        Vector3Int step = GetStepToward(playerCell);
+
+        if (step == Vector3Int.zero)
+            return;
+
+        Vector3Int nextCell = cellPos + step;
+
+        // walls and obstacles both block in rage phase
+        if (IsWall(nextCell) || IsObstacle(nextCell))
+        {
+            return;
+        }
+
+        cellPos = nextCell;
+        transform.position = grid.GetCellCenterWorld(cellPos);
+
+        // if we step onto the player in rage state, player loses
+        if (cellPos == GameManager.I.currentPlayerCell)
+        {
+            GameManager.I.TriggerLose();
+        }
     }
 
-    private void MoveAsAnimal()
+    private void EnterPacifyState()
     {
-        // try current direction
-        Vector3Int tryDir = moveDir;
+        state = NpcState.Pacify;
+
+        if (sr != null && pacifySprite != null)
+        {
+            sr.sprite = pacifySprite;
+        }
+
+        pacifyMoveDir = Vector3Int.right;
+    }
+
+    private void MoveAsPacifiedAnimal()
+    {
+        Vector3Int tryDir = pacifyMoveDir;
         Vector3Int nextCell = cellPos + tryDir;
 
-        // check walls first
+        // walls: bounce immediately in this turn
         if (IsWall(nextCell))
         {
-            // flip direction and try opposite in same turn
-            tryDir = -moveDir;
+            tryDir = -pacifyMoveDir;
             nextCell = cellPos + tryDir;
 
-            // both sides blocked by walls -> stay
             if (IsWall(nextCell))
             {
-                return;
+                return; // blocked on both sides
             }
 
-            moveDir = tryDir;
+            pacifyMoveDir = tryDir;
         }
 
-        // check obstacles (boxes)
+        // obstacles: break if allowed
         if (IsObstacle(nextCell))
         {
-            if (canBreakObstacles)
+            if (canBreakObstacles && obstacleTilemap != null)
             {
-                // destroy the box and move through
                 obstacleTilemap.SetTile(nextCell, null);
             }
             else
             {
-                // cannot pass obstacles
                 return;
             }
         }
 
-        // move one cell
         cellPos = nextCell;
         transform.position = grid.GetCellCenterWorld(cellPos);
+    }
+
+    private Vector3Int GetStepToward(Vector3Int target)
+    {
+        Vector3Int diff = target - cellPos;
+
+        if (Mathf.Abs(diff.x) > Mathf.Abs(diff.y))
+        {
+            if (diff.x > 0) return Vector3Int.right;
+            if (diff.x < 0) return Vector3Int.left;
+        }
+        else
+        {
+            if (diff.y > 0) return Vector3Int.up;
+            if (diff.y < 0) return Vector3Int.down;
+        }
+
+        return Vector3Int.zero;
     }
 
     private bool IsWall(Vector3Int cell)
