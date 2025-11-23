@@ -29,6 +29,10 @@ public class ThrowPotion : MonoBehaviour
     // could make a consistent thing instead
     public float travelTime = 0.5f;
 
+    [Header("Audio")]
+    public AudioClip throwSFX;
+    public AudioSource audioSource;
+
     PotionType selectedPotion;
     private Vector3Int facingDirection = Vector3Int.up;
     private int currentRange = 1;
@@ -109,6 +113,12 @@ public class ThrowPotion : MonoBehaviour
     void HandleThrow()
     {
         if (!Input.GetMouseButtonDown(0)) return;
+
+        if (throwSFX != null && audioSource != null)
+        {
+            audioSource.PlayOneShot(throwSFX);
+        }
+
         Vector3Int originCell = grid.WorldToCell(playerOrgin.position);
 
         Vector3Int targetCell = originCell;
