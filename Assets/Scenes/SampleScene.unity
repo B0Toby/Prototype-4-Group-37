@@ -2722,8 +2722,7 @@ MonoBehaviour:
   endCells:
   - {x: 14, y: 7, z: 0}
   currentPlayerCell: {x: 0, y: 0, z: 0}
-  npcs:
-  - {fileID: 940223250}
+  npcs: []
   animals: []
   endScreenPanel: {fileID: 1889038472}
   endScreenText: {fileID: 372672595}

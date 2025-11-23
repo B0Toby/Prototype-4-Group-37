@@ -108,7 +108,7 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(current.buildIndex);
     }
 
-    // creature registration
+    // creature registration for holding them in the lists
     public void RegisterNpc(NpcController npc) => npcs.Add(npc);
     public void UnregisterNpc(NpcController npc) => npcs.Remove(npc);
  

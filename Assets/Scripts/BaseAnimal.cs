@@ -14,7 +14,6 @@ public abstract class BaseAnimal : MonoBehaviour
     }
 
 
-    // initialize at
     public virtual void InitializeFromNpc(NpcController npc)
     {
         grid = npc.grid;
@@ -25,13 +24,35 @@ public abstract class BaseAnimal : MonoBehaviour
         transform.position = grid.GetCellCenterWorld(cellPos);
     }
     
-    // define movement pattern and unique behaviors in specific animal files
+    // movement logic when pacified
     public abstract void OnPlayerStep();
+
+    // movement logic when enraged
+    public abstract Vector3Int RageStep(NpcController npc);
+
+    // use if animal should follow player ever
+    protected Vector3Int GetStepToward(Vector3Int start, Vector3Int target)
+    {
+        Vector3Int diff = target - start;
+
+        if (Mathf.Abs(diff.x) > Mathf.Abs(diff.y))
+        {
+            if (diff.x > 0) return Vector3Int.right;
+            if (diff.x < 0) return Vector3Int.left;
+        }
+        else
+        {
+            if (diff.y > 0) return Vector3Int.up;
+            if (diff.y < 0) return Vector3Int.down;
+        }
+
+        return Vector3Int.zero;
+    }
 
     protected bool IsWall(Vector3Int c) => wallTilemap != null && wallTilemap.HasTile(c);
     protected bool IsObstacle(Vector3Int c) => obstacleTilemap != null && obstacleTilemap.HasTile(c);
-    public Vector3Int GetCellPosition() => cellPos;
     // add pits if we are gonna make the snake
+    public Vector3Int GetCellPosition() => cellPos;
 
     private void OnDestroy()
     {

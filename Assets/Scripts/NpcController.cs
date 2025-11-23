@@ -29,7 +29,8 @@ public class NpcController : MonoBehaviour
 
     // rage state data
     private PotionType hitPotion;       // specified when hit with potion
-    private GameObject transformAnimal; // specified when hit with potion
+    private GameObject animalPrefab;      // specified when hit with potion
+    private BaseAnimal animalData;
     private int rageTurnsLeft = 0;
     private int rageMoveCounter = 0;
     private int rageMoveInterval = 2;   // move once every X player turns  
@@ -83,7 +84,8 @@ public class NpcController : MonoBehaviour
     {
         // set new properties
         hitPotion = potion;
-        transformAnimal = potion.animalPrefab;
+        animalPrefab = potion.animalPrefab;
+        animalData = animalPrefab.GetComponent<BaseAnimal>();
 
         if (state == NpcState.Pacify)
             return;
@@ -116,26 +118,17 @@ public class NpcController : MonoBehaviour
         }
         rageMoveCounter = 0;
 
-        if (GameManager.I == null)
-            return;
-
-        // move 1 step toward player
-        Vector3Int playerCell = GameManager.I.currentPlayerCell;
-        Vector3Int step = GetStepToward(playerCell);
-
-        if (step == Vector3Int.zero)
-            return;
-
-        Vector3Int nextCell = cellPos + step;
-
-        // walls and obstacles both block in rage phase
-        if (IsWall(nextCell) || IsObstacle(nextCell))
+        // npc movement during rage state is based on animal properties
+        if (animalData != null)
         {
-            return;
+            Vector3Int nextCell = animalData.RageStep(this);
+
+            cellPos = nextCell;
+            transform.position = grid.GetCellCenterWorld(cellPos);
         }
 
-        cellPos = nextCell;
-        transform.position = grid.GetCellCenterWorld(cellPos);
+        if (GameManager.I == null)
+            return;
 
         // if we step onto the player in rage state, player loses
         if (cellPos == GameManager.I.currentPlayerCell)
@@ -147,7 +140,7 @@ public class NpcController : MonoBehaviour
     // instantiate animal prefab and destroy npc
     private void TransformIntoAnimal()
     {
-        GameObject animalObj = Instantiate(transformAnimal, transform.position, Quaternion.identity);
+        GameObject animalObj = Instantiate(animalPrefab, transform.position, Quaternion.identity);
         BaseAnimal animal = animalObj.GetComponent<BaseAnimal>();
 
         if (animal != null)
@@ -162,6 +155,7 @@ public class NpcController : MonoBehaviour
             GameManager.I.UnregisterNpc(this);
     }
 
+    // left in here in case we want to use it later
     private Vector3Int GetStepToward(Vector3Int target)
     {
         Vector3Int diff = target - cellPos;
