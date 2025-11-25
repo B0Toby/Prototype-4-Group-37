@@ -15,6 +15,7 @@ Our prompt is "transformer" and dread. Some mechanics we wanted to explore are t
 - **Door sound** and **attack sound** by **Leohpaz** from **itch.io**
 - **Pig sounds** by **Vinrax** from **OpenGameArt**
 - **Bubble sounds** by **KRNBEATZ** from **Pixabay**
+- **Disney Heroic Font** from **daFont**
 
 ---
 

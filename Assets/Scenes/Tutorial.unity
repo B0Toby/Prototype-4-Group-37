@@ -1297,7 +1297,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: People do not like being turned into animals. Beware of Enraged Enemies!
+  m_text: Magic Potions won't take effect right away. Beware of Enraged Enemies!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4df8e6e4bc606954cb37aedbcc81ff18, type: 2}
   m_sharedMaterial: {fileID: -5013450664707124485, guid: 4df8e6e4bc606954cb37aedbcc81ff18, type: 2}
