@@ -24,6 +24,10 @@ public class NpcController : MonoBehaviour
     public Sprite rageSprite;
     //public Sprite pacifySprite;
 
+    //audio for transformation
+    [Header("Audio")]
+    public AudioClip rageLoopClip;
+
     // current state
     public NpcState state = NpcState.Idle;
 
@@ -40,6 +44,7 @@ public class NpcController : MonoBehaviour
     private Vector3Int pacifyMoveDir = Vector3Int.right;
 
     private SpriteRenderer sr;
+    private AudioSource audioSource;
 
     private void Start()
     {
@@ -54,6 +59,8 @@ public class NpcController : MonoBehaviour
         {
             sr.sprite = idleSprite;
         }
+
+        audioSource = GetComponent<AudioSource>();
 
         GameManager.I.RegisterNpc(this);
     }
@@ -98,6 +105,14 @@ public class NpcController : MonoBehaviour
         {
             sr.sprite = rageSprite;
         }
+
+        // potion bubble audio (plays during rage only)
+        if (audioSource != null && rageLoopClip != null)
+        {
+            audioSource.clip = rageLoopClip;
+            audioSource.loop = true;
+            audioSource.Play();
+        }
     }
 
     private void HandleRageStep()
@@ -107,6 +122,10 @@ public class NpcController : MonoBehaviour
         if (rageTurnsLeft <= 0)
         {
             state = NpcState.Pacify;
+      
+            if (audioSource != null)
+                audioSource.Stop();
+
             return;
         }
 

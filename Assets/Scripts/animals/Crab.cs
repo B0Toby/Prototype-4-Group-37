@@ -7,6 +7,15 @@ public class Crab : BaseAnimal
 {
     private Vector3Int moveDir = Vector3Int.right;
 
+    private AudioSource audioSource;
+    public AudioClip obstacleBreakClip;
+
+    private void Awake()
+    {
+        // reference the AudioSource already on the prefab
+        audioSource = GetComponent<AudioSource>();
+    }
+
     // step functions mostly copied over from original npc controller
     public override Vector3Int RageStep(NpcController npc)
     {
@@ -52,6 +61,11 @@ public class Crab : BaseAnimal
             if (obstacleTilemap != null)
             {
                 obstacleTilemap.SetTile(nextCell, null);
+
+                if (audioSource != null && obstacleBreakClip != null)
+                {
+                    audioSource.PlayOneShot(obstacleBreakClip);
+                }
             }
             else
             {
