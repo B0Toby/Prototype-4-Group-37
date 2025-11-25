@@ -40,6 +40,9 @@ public class PlayerController : MonoBehaviour
 
         if (GameManager.I != null)
         {
+            // store last move direction for animals like the parrot
+            GameManager.I.lastPlayerMoveDir = dir;
+
             GameManager.I.OnPlayerMoved(cellPos);
         }
     }

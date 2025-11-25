@@ -15,6 +15,9 @@ public class GameManager : MonoBehaviour
     [Header("Player")]
     public Vector3Int currentPlayerCell;
 
+    [Header("Player movement")]
+    public Vector3Int lastPlayerMoveDir;
+
     [Header("NPCs in this level")]
     public List<NpcController> npcs = new List<NpcController>();
 
@@ -111,7 +114,6 @@ public class GameManager : MonoBehaviour
     // creature registration for holding them in the lists
     public void RegisterNpc(NpcController npc) => npcs.Add(npc);
     public void UnregisterNpc(NpcController npc) => npcs.Remove(npc);
- 
     public void RegisterAnimal(BaseAnimal a) => animals.Add(a);
     public void UnregisterAnimal(BaseAnimal a) => animals.Remove(a);
 }
