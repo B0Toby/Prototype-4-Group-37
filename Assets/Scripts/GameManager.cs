@@ -97,7 +97,17 @@ public class GameManager : MonoBehaviour
 
     public void TriggerWin()
     {
-        EndGame("You Win!");
+        int index = SceneManager.GetActiveScene().buildIndex;
+        int lastIndex = SceneManager.sceneCountInBuildSettings - 1;
+
+        if (index == lastIndex)
+        {
+            EndGame("You Win!");
+        }
+        else
+        {
+            SceneManager.LoadScene(index + 1);
+        }
     }
 
     public void TriggerLose()
