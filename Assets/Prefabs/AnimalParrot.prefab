@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6142931287556957367}
   - component: {fileID: 4622102579231004127}
   - component: {fileID: -2807387396725333176}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: AnimalParrot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
