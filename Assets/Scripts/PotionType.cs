@@ -4,6 +4,7 @@ using UnityEngine;
 public class PotionType : ScriptableObject
 {
     public string potionName;
+    public Sprite iconSprite;
     public GameObject potionPrefab;
     public GameObject animalPrefab;
 

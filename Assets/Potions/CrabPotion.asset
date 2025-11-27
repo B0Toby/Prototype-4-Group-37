@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: CrabPotion
   m_EditorClassIdentifier: 
   potionName: Crab Potion
+  iconSprite: {fileID: -7945353237565122060, guid: ff1f8d36c9d2ca0449f45d58b26f6757, type: 3}
   potionPrefab: {fileID: 5150402214769740356, guid: 22b8cb32ea04ff543a926d3272d323d1, type: 3}
   animalPrefab: {fileID: 221625662963821887, guid: 5153f8fd4929c58458796ad6a02711f9, type: 3}
   rageTurns: 3

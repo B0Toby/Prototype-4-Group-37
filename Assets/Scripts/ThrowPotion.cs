@@ -24,6 +24,8 @@ public class ThrowPotion : MonoBehaviour
     public PotionType[] potions;
     private int selectedIndex = 0;
 
+    public int SelectedIndex => selectedIndex;
+
     [Header("Throw Settings")]
     // made range potion dependent for now
     // could make a consistent thing instead
