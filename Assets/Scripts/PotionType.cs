@@ -9,6 +9,7 @@ public class PotionType : ScriptableObject
     public GameObject animalPrefab;
 
     public int rageTurns = 3;
+    public int moveInterval = 2;
 
     public int minRange = 1;
     public int maxRange = 3;

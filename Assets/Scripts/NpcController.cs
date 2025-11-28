@@ -24,6 +24,11 @@ public class NpcController : MonoBehaviour
     public Sprite rageSprite;
     //public Sprite pacifySprite;
 
+    [Header("Rage UI")]
+    public Canvas uiCanvas;
+    public GameObject rageTurnCounterPrefab;
+    private RageCounterUI rageCounterUI;
+
     //audio for transformation
     [Header("Audio")]
     public AudioClip rageLoopClip;
@@ -32,12 +37,12 @@ public class NpcController : MonoBehaviour
     public NpcState state = NpcState.Idle;
 
     // rage state data
-    private PotionType hitPotion;       // specified when hit with potion
-    private GameObject animalPrefab;      // specified when hit with potion
+    private PotionType hitPotion;           // specified when hit with potion
+    private GameObject animalPrefab;        // specified when hit with potion
     private BaseAnimal animalData;
     private int rageTurnsLeft = 0;
     private int rageMoveCounter = 0;
-    private int rageMoveInterval = 2;   // move once every X player turns  
+    private int rageMoveInterval = 0;       // move once every X player turns  
 
     // position & movement
     private Vector3Int cellPos;
@@ -99,11 +104,22 @@ public class NpcController : MonoBehaviour
 
         state = NpcState.Rage;
         rageTurnsLeft = hitPotion.rageTurns;
+        rageMoveInterval = hitPotion.moveInterval;
         rageMoveCounter = 0;
 
+        // set sprite to rage sprite
         if (sr != null && rageSprite != null)
         {
             sr.sprite = rageSprite;
+        }
+
+        // have a rage counter appear
+        if (rageTurnCounterPrefab != null)
+        {
+            GameObject rageUI = Instantiate(rageTurnCounterPrefab, uiCanvas.transform);
+            rageCounterUI = rageUI.GetComponent<RageCounterUI>();
+            rageCounterUI.SetValue(rageTurnsLeft);
+            rageCounterUI.UpdatePosition(transform.position);
         }
 
         // potion bubble audio (plays during rage only)
@@ -119,6 +135,7 @@ public class NpcController : MonoBehaviour
     {
         // rage lasts a limited number of player turns
         rageTurnsLeft--;
+        rageCounterUI.SetValue(rageTurnsLeft);
         if (rageTurnsLeft <= 0)
         {
             state = NpcState.Pacify;
@@ -146,6 +163,12 @@ public class NpcController : MonoBehaviour
             transform.position = grid.GetCellCenterWorld(cellPos);
         }
 
+        // make sure counter UI stays with the npc
+        if (rageCounterUI != null)
+        {
+            rageCounterUI.UpdatePosition(transform.position);
+        }
+
         if (GameManager.I == null)
             return;
 
@@ -165,6 +188,11 @@ public class NpcController : MonoBehaviour
         if (animal != null)
             animal.InitializeFromNpc(this);
 
+        // remove UI when rage ends
+        Destroy(rageCounterUI.gameObject);
+        rageCounterUI = null;
+
+        // remove NPC when rage ends
         Destroy(gameObject);
     }
 
