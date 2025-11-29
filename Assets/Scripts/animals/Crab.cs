@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.Tilemaps;
 using System.Collections;
 using System.Collections.Generic;
@@ -10,10 +11,21 @@ public class Crab : BaseAnimal
     private AudioSource audioSource;
     public AudioClip obstacleBreakClip;
 
+    [Header("Animation")]
+    public Animator animator;
+    private SpriteRenderer sr;
+    private static readonly int HashDoWalk = Animator.StringToHash("DoWalk");
+
     private void Awake()
     {
         // reference the AudioSource already on the prefab
         audioSource = GetComponent<AudioSource>();
+
+        if (animator == null)
+            animator = GetComponent<Animator>();
+
+        sr = GetComponent<SpriteRenderer>();
+
         animalName = "Crab";
         behaviorNote = "Moves only left & right\r\nBreaks obstacles in its path";
 
@@ -45,6 +57,7 @@ public class Crab : BaseAnimal
 
     public override void OnPlayerStep()
     {
+        Vector3Int startCell = cellPos;
         Vector3Int nextCell = cellPos + moveDir;
         // walls: bounce immediately in this turn
         if (IsWall(nextCell))
@@ -79,6 +92,24 @@ public class Crab : BaseAnimal
         cellPos = nextCell;
         transform.position = grid.GetCellCenterWorld(cellPos);
 
+        if (cellPos != startCell)
+        {
+            PlayWalkOnce(moveDir);
+        }
+    }
 
+    private void PlayWalkOnce(Vector3Int dir)
+    {
+        if (sr != null)
+        {
+            if (dir.x > 0) sr.flipX = false;
+            else if (dir.x < 0) sr.flipX = true;
+        }
+
+        if (animator != null)
+        {
+            animator.ResetTrigger(HashDoWalk);
+            animator.SetTrigger(HashDoWalk);
+        }
     }
 }

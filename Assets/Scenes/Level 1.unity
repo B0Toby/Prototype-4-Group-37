@@ -1700,7 +1700,6 @@ MonoBehaviour:
   playerOrgin: {fileID: 76543061}
   highlightPrefab: {fileID: 4568550638271010856, guid: 77d075172a46be64c801b2e4bfb670a7, type: 3}
   potions:
-  - {fileID: 11400000, guid: e7915c9b79e44c14fb50786bdd5a287d, type: 2}
   - {fileID: 11400000, guid: d8b80584dc30f0d4db9d34f7924ac7e9, type: 2}
   travelTime: 0.5
   throwSFX: {fileID: 8300000, guid: de9b7cf7b7fc8f34eb0c1dadf6376e04, type: 3}

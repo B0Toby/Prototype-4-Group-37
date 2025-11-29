@@ -4103,6 +4103,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: NPC Human 01
       objectReference: {fileID: 0}
+    - target: {fileID: 4279110632116777908, guid: fe97a495f30177445adf04e3b85bc72e, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 1426666553488855073, guid: ec421cf0cf0df3e439729a631b932f62, type: 3}
     - target: {fileID: 5778346518124581951, guid: fe97a495f30177445adf04e3b85bc72e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.5
