@@ -1,12 +1,15 @@
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public abstract class BaseAnimal : MonoBehaviour
+public abstract class BaseAnimal : MonoBehaviour, TooltipInterface
 {
     protected Grid grid;
     protected Tilemap wallTilemap;
     protected Tilemap obstacleTilemap;
     protected Vector3Int cellPos;
+
+    protected string animalName;
+    protected string behaviorNote;
 
     private void Start()
     {
@@ -58,6 +61,11 @@ public abstract class BaseAnimal : MonoBehaviour
     {
         if (GameManager.I != null)
             GameManager.I.UnregisterAnimal(this);
+    }
+
+    public string GetTooltipText()
+    {
+        return $"{animalName}\n<size=80%><i>{behaviorNote}</i></size>";
     }
 
 }

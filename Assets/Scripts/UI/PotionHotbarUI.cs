@@ -35,6 +35,7 @@ public class PotionHotbarUI : MonoBehaviour
             PotionIconUI slot = Instantiate(slotPrefab, slotParent);
             slot.SetSprite(potions[i].iconSprite); // auto-assign icon
             slot.SetSelected(false);
+            slot.SetPotion(potions[i].potionName, potions[i].rageTurns);
             slots[i] = slot;
         }
     }

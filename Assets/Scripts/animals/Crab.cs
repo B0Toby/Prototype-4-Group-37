@@ -14,6 +14,9 @@ public class Crab : BaseAnimal
     {
         // reference the AudioSource already on the prefab
         audioSource = GetComponent<AudioSource>();
+        animalName = "Crab";
+        behaviorNote = "Moves only left & right\r\nBreaks obstacles in its path";
+
     }
 
     // step functions mostly copied over from original npc controller
@@ -75,5 +78,7 @@ public class Crab : BaseAnimal
 
         cellPos = nextCell;
         transform.position = grid.GetCellCenterWorld(cellPos);
+
+
     }
 }

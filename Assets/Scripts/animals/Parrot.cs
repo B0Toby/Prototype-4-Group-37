@@ -1,9 +1,17 @@
-using UnityEngine;
-using UnityEngine.Tilemaps;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.Audio;
+using UnityEngine.Tilemaps;
 public class Parrot : BaseAnimal
 {
+    private void Awake()
+    {
+        animalName = "Parrot";
+        behaviorNote = "Mimics player movement";
+
+    }
+
     public override Vector3Int RageStep(NpcController npc)
     {
         return npc.GetCellPosition();

@@ -16,7 +16,7 @@ MonoBehaviour:
   iconSprite: {fileID: -7968582897747660167, guid: eb1e3bd6fd77d4340bf80ddbe47af7a2, type: 3}
   potionPrefab: {fileID: 5150402214769740356, guid: 5067b02891b62c84c8a8d89f1c88c74d, type: 3}
   animalPrefab: {fileID: 221625662963821887, guid: ee8c00432834b6b459b731f299728d20, type: 3}
-  rageTurns: 2
+  rageTurns: 4
   moveInterval: 1
   minRange: 1
   maxRange: 3

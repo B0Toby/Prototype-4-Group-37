@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PotionIconUI : MonoBehaviour
+public class PotionIconUI : MonoBehaviour, TooltipInterface
 {
     public Image background;
     public Image iconSprite;
@@ -11,6 +11,9 @@ public class PotionIconUI : MonoBehaviour
 
     private Sprite potionIcon;
     private bool isSelected;
+
+    private string potionName;
+    private int potionRageTurns;
 
     public void RefreshUI()
     {
@@ -40,5 +43,16 @@ public class PotionIconUI : MonoBehaviour
     {
         isSelected = selected;
         RefreshUI();
+    }
+
+    public void SetPotion(string potion, int turns)
+    {
+        potionName = potion;
+        potionRageTurns = turns;
+    }
+
+    public string GetTooltipText()
+    {
+        return $"{potionName}\n<size=80%><i>Takes {potionRageTurns} turns to complete transformation</i></size>";
     }
 }
