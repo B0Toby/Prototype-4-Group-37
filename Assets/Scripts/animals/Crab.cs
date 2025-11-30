@@ -8,6 +8,7 @@ public class Crab : BaseAnimal
 {
     private Vector3Int moveDir = Vector3Int.right;
 
+    [Header("Audio")]
     private AudioSource audioSource;
     public AudioClip obstacleBreakClip;
 
@@ -46,7 +47,18 @@ public class Crab : BaseAnimal
 
         Vector3Int nextCell = npcCell + step;
 
-        // walls and obstacles both block in rage phase
+        BaseAnimal hitAnimal = GetAnimalAtCell(nextCell);
+        if (hitAnimal != null)
+        {
+            if (hitAnimal.bounce == true)
+            {
+                Vector3Int bounceCell = npcCell - step;
+                if (GetAnimalAtCell(bounceCell) == null)
+                    nextCell = bounceCell;
+            }
+        }
+
+       // walls and obstacles both block in rage phase
         if (IsWall(nextCell) || IsObstacle(nextCell))
         {
             return npcCell;
@@ -59,6 +71,28 @@ public class Crab : BaseAnimal
     {
         Vector3Int startCell = cellPos;
         Vector3Int nextCell = cellPos + moveDir;
+
+        // animals: bounce in new direction if pig in nextCell
+        BaseAnimal hitAnimal = GetAnimalAtCell(nextCell);
+        if (hitAnimal != null)
+        {
+            if (hitAnimal.bounce == true)
+            {
+                if (moveDir == Vector3Int.left || moveDir == Vector3Int.right)
+                {
+                    moveDir = (Random.value < 0.5f) ? Vector3Int.up : Vector3Int.down;
+                }
+                else
+                {
+                    moveDir = (Random.value < 0.5f) ? Vector3Int.left : Vector3Int.right;
+                }
+
+                Vector3Int bounceCell = cellPos + moveDir;
+                if (GetAnimalAtCell(bounceCell) == null)
+                    nextCell = bounceCell;
+            }
+        }
+
         // walls: bounce immediately in this turn
         if (IsWall(nextCell))
         {

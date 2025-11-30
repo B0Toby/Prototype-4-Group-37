@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e64ba64e868cae843a01aa29a300b56b, type: 3}
+  m_Name: PigPotion
+  m_EditorClassIdentifier: 
+  potionName: Pig Potion
+  iconSprite: {fileID: -2293287565930242739, guid: a232e48b4102b4747a2a9af2fae98a8b, type: 3}
+  potionPrefab: {fileID: 4175227505549607372, guid: 6dc8fa9a107aa7544a645e2e7edcabe9, type: 3}
+  animalPrefab: {fileID: 221625662963821887, guid: 78993828367e59e4b8be6c1675e6756a, type: 3}
+  rageTurns: 6
+  moveInterval: 2
+  minRange: 1
+  maxRange: 3

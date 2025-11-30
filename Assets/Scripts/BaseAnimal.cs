@@ -10,6 +10,7 @@ public abstract class BaseAnimal : MonoBehaviour, TooltipInterface
 
     protected string animalName;
     protected string behaviorNote;
+    public bool bounce = false;
 
     private void Start()
     {
@@ -52,9 +53,19 @@ public abstract class BaseAnimal : MonoBehaviour, TooltipInterface
         return Vector3Int.zero;
     }
 
+    protected BaseAnimal GetAnimalAtCell(Vector3Int c)
+    {
+        foreach (var a in GameManager.I.animals)
+        {
+            if (a != this && a.GetCellPosition() == c)
+                return a;
+        }
+        return null;
+    }
+
     protected bool IsWall(Vector3Int c) => wallTilemap != null && wallTilemap.HasTile(c);
     protected bool IsObstacle(Vector3Int c) => obstacleTilemap != null && obstacleTilemap.HasTile(c);
-    // add pits if we are gonna make the snake
+    
     public Vector3Int GetCellPosition() => cellPos;
 
     private void OnDestroy()
@@ -67,5 +78,7 @@ public abstract class BaseAnimal : MonoBehaviour, TooltipInterface
     {
         return $"{animalName}\n<size=80%><i>{behaviorNote}</i></size>";
     }
+
+
 
 }
