@@ -1,37 +1,25 @@
 fileFormatVersion: 2
-guid: 063f35751ae27cd4c906da14b8d34d02
+guid: 0743c4d2a6d52684e8628b08b3d3e978
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -4100540790493266562
-    second: circe_0
+      213: -8922328891513336043
+    second: npc_0
   - first:
-      213: 6464608880266621860
-    second: circe_1
+      213: 5527661196443274707
+    second: npc_1
   - first:
-      213: -7253743711876020846
-    second: circe_2
+      213: -2495014906627460004
+    second: npc_2
   - first:
-      213: 4010862817940923875
-    second: circe_3
+      213: 5610367206947713552
+    second: npc_3
   - first:
-      213: 6747512860869962694
-    second: circe_4
+      213: 2230936588577103941
+    second: npc_4
   - first:
-      213: 7757293914222915957
-    second: circe_5
-  - first:
-      213: -129054296615872448
-    second: circe_6
-  - first:
-      213: -3166175570949713407
-    second: circe_7
-  - first:
-      213: -3857961713277122185
-    second: circe_8
-  - first:
-      213: 27132453360485912
-    second: circe_9
+      213: -9111473675286820144
+    second: npc_5
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -140,183 +128,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: circe_0
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 192
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: e7d36ab60e3f717c0800000000000000
-      internalID: -4100540790493266562
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: circe_1
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 192
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 4a3b0209687e6b950800000000000000
-      internalID: 6464608880266621860
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: circe_2
-      rect:
-        serializedVersion: 2
-        x: 128
-        y: 192
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 29508e9a686855b90800000000000000
-      internalID: -7253743711876020846
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: circe_3
-      rect:
-        serializedVersion: 2
-        x: 192
-        y: 192
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 3e5e0328b7279a730800000000000000
-      internalID: 4010862817940923875
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: circe_4
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 128
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 6cba885723bf3ad50800000000000000
-      internalID: 6747512860869962694
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: circe_5
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 128
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 5717e8f07b177ab60800000000000000
-      internalID: 7757293914222915957
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: circe_6
-      rect:
-        serializedVersion: 2
-        x: 128
-        y: 128
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 048197d0dc1853ef0800000000000000
-      internalID: -129054296615872448
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: circe_7
-      rect:
-        serializedVersion: 2
-        x: 192
-        y: 128
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 102d505e71c7f04d0800000000000000
-      internalID: -3166175570949713407
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: circe_8
+      name: npc_0
       rect:
         serializedVersion: 2
         x: 0
@@ -331,14 +143,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 7794f0b1344c57ac0800000000000000
-      internalID: -3857961713277122185
+      spriteID: 51f842c45258d2480800000000000000
+      internalID: -8922328891513336043
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: circe_9
+      name: npc_1
       rect:
         serializedVersion: 2
         x: 64
@@ -353,14 +165,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 816cf6492d4606000800000000000000
-      internalID: 27132453360485912
+      spriteID: 3dd46b4429236bc40800000000000000
+      internalID: 5527661196443274707
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: circe_10
+      name: npc_2
       rect:
         serializedVersion: 2
         x: 128
@@ -373,16 +185,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 8dd3b97f7b0c1654db0e3d84bb50c4ac
-      internalID: 922809501
+      spriteID: c547a2d592def5dd0800000000000000
+      internalID: -2495014906627460004
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: circe_11
+      name: npc_3
       rect:
         serializedVersion: 2
         x: 192
@@ -395,16 +207,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: e9a14f1fdce76a042a8bc08344555895
-      internalID: -571182771
+      spriteID: 0127e9def370cdd40800000000000000
+      internalID: 5610367206947713552
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: circe_12
+      name: npc_4
       rect:
         serializedVersion: 2
         x: 0
@@ -417,16 +229,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 08e407794a5ba4741864468a85953eb5
-      internalID: -1702708087
+      spriteID: 5406f8ed101e5fe10800000000000000
+      internalID: 2230936588577103941
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: circe_13
+      name: npc_5
       rect:
         serializedVersion: 2
         x: 64
@@ -439,16 +251,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 9ec1e2f4e06b7b046a89ce6fc3c89b4a
-      internalID: -739461415
+      spriteID: 0dac43c87fa8d8180800000000000000
+      internalID: -9111473675286820144
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: circe_14
+      name: npc_6
       rect:
         serializedVersion: 2
         x: 128
@@ -463,8 +275,30 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c177bbe330380174c99c02621ca0769d
-      internalID: 1347299058
+      spriteID: 5901f23f266e93a4fb795b115ef4c1ef
+      internalID: 353243181
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: npc_7
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e92d790fb797a0741aa36f27db0a21f7
+      internalID: -1287902299
       vertices: []
       indices: 
       edges: []
@@ -473,7 +307,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: de82e53ab28869c409b25ad7097994cd
+    spriteID: c1a372faf52c0e44c85fbd46ed4fd83f
     internalID: 0
     vertices: []
     indices: 
@@ -483,21 +317,14 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      circe_0: -4100540790493266562
-      circe_1: 6464608880266621860
-      circe_10: 922809501
-      circe_11: -571182771
-      circe_12: -1702708087
-      circe_13: -739461415
-      circe_14: 1347299058
-      circe_2: -7253743711876020846
-      circe_3: 4010862817940923875
-      circe_4: 6747512860869962694
-      circe_5: 7757293914222915957
-      circe_6: -129054296615872448
-      circe_7: -3166175570949713407
-      circe_8: -3857961713277122185
-      circe_9: 27132453360485912
+      npc_0: -8922328891513336043
+      npc_1: 5527661196443274707
+      npc_2: -2495014906627460004
+      npc_3: 5610367206947713552
+      npc_4: 2230936588577103941
+      npc_5: -9111473675286820144
+      npc_6: 353243181
+      npc_7: -1287902299
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

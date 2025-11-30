@@ -18,6 +18,7 @@ public class ThrowPotion : MonoBehaviour
     public Tilemap wallTilemap;
     public Transform playerOrgin;
     public GameObject highlightPrefab;
+    public PlayerController playerController;
 
     // add additional potions in the editor
     [Header("Potions")]
@@ -121,6 +122,11 @@ public class ThrowPotion : MonoBehaviour
             audioSource.PlayOneShot(throwSFX);
         }
 
+        if (playerController != null)
+        {
+            playerController.PlayThrow(facingDirection);
+        }
+
         Vector3Int originCell = grid.WorldToCell(playerOrgin.position);
 
         Vector3Int targetCell = originCell;
@@ -160,7 +166,7 @@ public class ThrowPotion : MonoBehaviour
         Destroy(proj.gameObject);
     }
 
-    
+
     // just logs stuff for now, start effect here vv
     void ApplyPotionEffect(Vector3 targetWorldPos)
     {

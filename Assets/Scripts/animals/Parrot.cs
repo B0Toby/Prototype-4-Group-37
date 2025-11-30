@@ -4,7 +4,6 @@ using UnityEngine.Tilemaps;
 using System.Collections;
 using System.Collections.Generic;
 
-
 public class Parrot : BaseAnimal
 {
     [Header("Animation")]

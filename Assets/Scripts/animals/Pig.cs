@@ -4,16 +4,28 @@ using UnityEngine.InputSystem.XR;
 
 public class Pig : BaseAnimal
 {
-    // add later
     //[Header("Audio")]
+    //private AudioSource audioSource;
+    //public AudioClip bounceClip;
 
-    //[Header("Animation")]
+    [Header("Animation")]
+    public Animator animator;
+    private SpriteRenderer sr;
+
+    private static readonly int HashDoWalkSide = Animator.StringToHash("DoWalkSide");
+    private static readonly int HashDoWalkUp   = Animator.StringToHash("DoWalkUp");
+    private static readonly int HashDoWalkDown = Animator.StringToHash("DoWalkDown");
 
     private void Awake()
     {
         animalName = "Pig";
         behaviorNote = "Other animals will bounce off of it";
         bounce = true;
+
+        if (animator == null)
+            animator = GetComponent<Animator>();
+
+        sr = GetComponent<SpriteRenderer>();
     }
 
     // copied from crab, adjust in a minute maybe
@@ -42,8 +54,42 @@ public class Pig : BaseAnimal
 
     public override void OnPlayerStep()
     {
-        // play idle animation
-        
+        if (GameManager.I == null)
+            return;
+
+        Vector3Int dir = GameManager.I.lastPlayerMoveDir;
+
+        if (dir == Vector3Int.zero)
+            return;
+
+        PlayWalk(dir);
     }
 
+    private void PlayWalk(Vector3Int dir)
+    {
+        if (animator == null) return;
+
+        animator.ResetTrigger(HashDoWalkSide);
+        animator.ResetTrigger(HashDoWalkUp);
+        animator.ResetTrigger(HashDoWalkDown);
+
+        if (dir.y > 0)
+        {
+            animator.SetTrigger(HashDoWalkUp);
+        }
+        else if (dir.y < 0)
+        {
+            animator.SetTrigger(HashDoWalkDown);
+        }
+        else
+        {
+            animator.SetTrigger(HashDoWalkSide);
+
+            if (sr != null)
+            {
+                if (dir.x > 0) sr.flipX = true;
+                else if (dir.x < 0) sr.flipX = false;
+            }
+        }
+    }
 }

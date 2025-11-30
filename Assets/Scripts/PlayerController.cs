@@ -12,12 +12,28 @@ public class PlayerController : MonoBehaviour
     public Tilemap wallTilemap;
     public Tilemap obstacleTilemap;
 
+    [Header("Animation")]
+    public Animator animator;
+    private SpriteRenderer sr;
+
+    private static readonly int HashWalkSide   = Animator.StringToHash("DoWalkSide");
+    private static readonly int HashWalkUp     = Animator.StringToHash("DoWalkUp");
+    private static readonly int HashWalkDown   = Animator.StringToHash("DoWalkDown");
+    private static readonly int HashThrowSide  = Animator.StringToHash("DoThrowSide");
+    private static readonly int HashThrowUp    = Animator.StringToHash("DoThrowUp");
+    private static readonly int HashThrowDown  = Animator.StringToHash("DoThrowDown");
+
     private Vector3Int cellPos;
 
     private void Start()
     {
         cellPos = grid.WorldToCell(transform.position);
         transform.position = grid.GetCellCenterWorld(cellPos);
+
+        if (animator == null)
+            animator = GetComponent<Animator>();
+
+        sr = GetComponent<SpriteRenderer>();
     }
 
     private void Update()
@@ -32,6 +48,7 @@ public class PlayerController : MonoBehaviour
 
         if (IsBlocked(targetCell))
         {
+            PlayWalk(dir);
             return;
         }
 
@@ -45,6 +62,8 @@ public class PlayerController : MonoBehaviour
 
             GameManager.I.OnPlayerMoved(cellPos);
         }
+
+        PlayWalk(dir);
     }
 
     private Vector3Int ReadInput()
@@ -74,5 +93,70 @@ public class PlayerController : MonoBehaviour
     public Vector3Int GetCellPosition()
     {
         return cellPos;
+    }
+
+    private void ResetAllTriggers()
+    {
+        if (animator == null) return;
+
+        animator.ResetTrigger(HashWalkSide);
+        animator.ResetTrigger(HashWalkUp);
+        animator.ResetTrigger(HashWalkDown);
+        animator.ResetTrigger(HashThrowSide);
+        animator.ResetTrigger(HashThrowUp);
+        animator.ResetTrigger(HashThrowDown);
+    }
+
+    public void PlayWalk(Vector3Int dir)
+    {
+        if (animator == null) return;
+
+        ResetAllTriggers();
+
+        if (dir.y > 0)
+        {
+            animator.SetTrigger(HashWalkUp);
+        }
+        else if (dir.y < 0)
+        {
+            animator.SetTrigger(HashWalkDown);
+        }
+        else
+        {
+            animator.SetTrigger(HashWalkSide);
+
+            if (sr != null)
+            {
+                if (dir.x > 0) sr.flipX = true;
+                else if (dir.x < 0) sr.flipX = false;
+            }
+        }
+    }
+
+
+    public void PlayThrow(Vector3Int dir)
+    {
+        if (animator == null) return;
+
+        ResetAllTriggers();
+
+        if (dir.y > 0)
+        {
+            animator.SetTrigger(HashThrowUp);
+        }
+        else if (dir.y < 0)
+        {
+            animator.SetTrigger(HashThrowDown);
+        }
+        else
+        {
+            animator.SetTrigger(HashThrowSide);
+
+            if (sr != null)
+            {
+                if (dir.x > 0) sr.flipX = true;
+                else if (dir.x < 0) sr.flipX = false;
+            }
+        }
     }
 }

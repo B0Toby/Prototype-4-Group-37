@@ -79,7 +79,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 1426666553488855073, guid: ec421cf0cf0df3e439729a631b932f62, type: 3}
+  m_Sprite: {fileID: -8922328891513336043, guid: 0743c4d2a6d52684e8628b08b3d3e978, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -107,8 +107,10 @@ MonoBehaviour:
   obstacleTilemap: {fileID: 0}
   idleSprite: {fileID: 1426666553488855073, guid: ec421cf0cf0df3e439729a631b932f62, type: 3}
   rageSprite: {fileID: 4807775697852972887, guid: 3c11ef87803636c4b837aa813ad88f7a, type: 3}
+  uiCanvas: {fileID: 0}
   rageTurnCounterPrefab: {fileID: 2075828536486426018, guid: ccc20303ee4f864448d732f716fd9308, type: 3}
   rageLoopClip: {fileID: 8300000, guid: d03c4c161b9bf114d877774b2e3253e9, type: 3}
+  animator: {fileID: 0}
   state: 0
 --- !u!61 &2357059866249975172
 BoxCollider2D:
@@ -148,7 +150,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.8, y: 0.8}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0

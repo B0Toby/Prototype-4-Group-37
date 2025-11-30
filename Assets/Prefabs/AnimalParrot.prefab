@@ -125,7 +125,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 3512498951170658160, guid: 0b59b804290de214c8f27407e04cbfed, type: 3}
+  m_Sprite: {fileID: 1385325168105757489, guid: 0b59b804290de214c8f27407e04cbfed, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -148,11 +148,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2584d8ceddaa204dbe6c7039f10ebdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bounce: 0
   animator: {fileID: 3308699806867821978}
-  idleState: Parrot_Idle
-  walkSide: Parrot_WalkSide
-  walkUp: Parrot_WalkUp
-  walkDown: Parrot_WalkDown
 --- !u!95 &3308699806867821978
 Animator:
   serializedVersion: 7

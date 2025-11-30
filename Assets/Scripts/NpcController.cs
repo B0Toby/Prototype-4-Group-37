@@ -33,6 +33,13 @@ public class NpcController : MonoBehaviour
     [Header("Audio")]
     public AudioClip rageLoopClip;
 
+    [Header("Animation")]
+    public Animator animator;
+
+    private static readonly int HashWalkSide = Animator.StringToHash("DoWalkSide");
+    private static readonly int HashWalkUp   = Animator.StringToHash("DoWalkUp");
+    private static readonly int HashWalkDown = Animator.StringToHash("DoWalkDown");
+
     // current state
     public NpcState state = NpcState.Idle;
 
@@ -64,6 +71,9 @@ public class NpcController : MonoBehaviour
         {
             sr.sprite = idleSprite;
         }
+
+        if (animator == null)
+            animator = GetComponent<Animator>();
 
         audioSource = GetComponent<AudioSource>();
 
@@ -159,8 +169,12 @@ public class NpcController : MonoBehaviour
         {
             Vector3Int nextCell = animalData.RageStep(this);
 
+            Vector3Int moveDir = nextCell - cellPos;
+
             cellPos = nextCell;
             transform.position = grid.GetCellCenterWorld(cellPos);
+
+            PlayWalk(moveDir);
         }
 
         // make sure counter UI stays with the npc
@@ -234,5 +248,37 @@ public class NpcController : MonoBehaviour
     public Vector3Int GetCellPosition()
     {
         return cellPos;
+    }
+
+    private void PlayWalk(Vector3Int dir)
+    {
+        if (animator == null) return;
+        if (dir == Vector3Int.zero) return;
+
+        animator.ResetTrigger(HashWalkSide);
+        animator.ResetTrigger(HashWalkUp);
+        animator.ResetTrigger(HashWalkDown);
+
+        if (Mathf.Abs(dir.y) > Mathf.Abs(dir.x))
+        {
+            if (dir.y > 0)
+            {
+                animator.SetTrigger(HashWalkUp);
+            }
+            else if (dir.y < 0)
+            {
+                animator.SetTrigger(HashWalkDown);
+            }
+        }
+        else
+        {
+            animator.SetTrigger(HashWalkSide);
+
+            if (sr != null)
+            {
+                if (dir.x > 0) sr.flipX = true;
+                else if (dir.x < 0) sr.flipX = false;
+            }
+        }
     }
 }
