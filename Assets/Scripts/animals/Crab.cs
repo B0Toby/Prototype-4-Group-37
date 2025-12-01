@@ -30,12 +30,12 @@ public class Crab : BaseAnimal
         animalName = "Crab";
         behaviorNote = "Moves only left & right\r\nBreaks obstacles in its path";
 
+        waterTilemap = GameObject.Find("Tilemap_Water")?.GetComponent<Tilemap>();
     }
 
     // step functions mostly copied over from original npc controller
     public override Vector3Int RageStep(NpcController npc)
     {
-
         // move 1 step toward player
         Vector3Int npcCell = npc.GetCellPosition();
         Vector3Int playerCell = GameManager.I.currentPlayerCell;
@@ -50,7 +50,7 @@ public class Crab : BaseAnimal
         BaseAnimal hitAnimal = GetAnimalAtCell(nextCell);
         if (hitAnimal != null)
         {
-            if (hitAnimal.bounce == true)
+            if (hitAnimal.bounce)
             {
                 Vector3Int bounceCell = npcCell - step;
                 if (GetAnimalAtCell(bounceCell) == null)
@@ -58,8 +58,14 @@ public class Crab : BaseAnimal
             }
         }
 
-       // walls and obstacles both block in rage phase
+        // walls and obstacles both block in rage phase
         if (IsWall(nextCell) || IsObstacle(nextCell))
+        {
+            return npcCell;
+        }
+
+        // water blocks crab only if it cannot traverse water
+        if (IsWater(nextCell) && !CanTraverseWater)
         {
             return npcCell;
         }
@@ -76,7 +82,7 @@ public class Crab : BaseAnimal
         BaseAnimal hitAnimal = GetAnimalAtCell(nextCell);
         if (hitAnimal != null)
         {
-            if (hitAnimal.bounce == true)
+            if (hitAnimal.bounce)
             {
                 if (moveDir == Vector3Int.left || moveDir == Vector3Int.right)
                 {
@@ -100,9 +106,17 @@ public class Crab : BaseAnimal
             nextCell = cellPos + moveDir;
 
             if (IsWall(nextCell))
-            {
                 return; // blocked on both sides
-            }
+        }
+
+        // water: bounce immediately if cannot traverse
+        if (IsWater(nextCell) && !CanTraverseWater)
+        {
+            moveDir = -moveDir;
+            nextCell = cellPos + moveDir;
+
+            if (IsWall(nextCell) || IsWater(nextCell))
+                return;
         }
 
         // obstacles: break if allowed
@@ -131,6 +145,9 @@ public class Crab : BaseAnimal
             PlayWalkOnce(moveDir);
         }
     }
+
+    // crab can traverse water
+    protected override bool CanTraverseWater => true;
 
     private void PlayWalkOnce(Vector3Int dir)
     {

@@ -6,6 +6,7 @@ public abstract class BaseAnimal : MonoBehaviour, TooltipInterface
     protected Grid grid;
     protected Tilemap wallTilemap;
     protected Tilemap obstacleTilemap;
+    protected Tilemap waterTilemap;
     protected Vector3Int cellPos;
 
     protected string animalName;
@@ -17,17 +18,17 @@ public abstract class BaseAnimal : MonoBehaviour, TooltipInterface
         GameManager.I.RegisterAnimal(this);
     }
 
-
     public virtual void InitializeFromNpc(NpcController npc)
     {
         grid = npc.grid;
         wallTilemap = npc.wallTilemap;
         obstacleTilemap = npc.obstacleTilemap;
+        waterTilemap = npc.waterTilemap;
 
         cellPos = npc.GetCellPosition();
         transform.position = grid.GetCellCenterWorld(cellPos);
     }
-    
+
     // movement logic when pacified
     public abstract void OnPlayerStep();
 
@@ -65,7 +66,11 @@ public abstract class BaseAnimal : MonoBehaviour, TooltipInterface
 
     protected bool IsWall(Vector3Int c) => wallTilemap != null && wallTilemap.HasTile(c);
     protected bool IsObstacle(Vector3Int c) => obstacleTilemap != null && obstacleTilemap.HasTile(c);
-    
+    protected bool IsWater(Vector3Int c) => waterTilemap != null && waterTilemap.HasTile(c);
+
+    // determines if this animal ignores water
+    protected virtual bool CanTraverseWater => false;
+
     public Vector3Int GetCellPosition() => cellPos;
 
     private void OnDestroy()
@@ -78,7 +83,4 @@ public abstract class BaseAnimal : MonoBehaviour, TooltipInterface
     {
         return $"{animalName}\n<size=80%><i>{behaviorNote}</i></size>";
     }
-
-
-
 }

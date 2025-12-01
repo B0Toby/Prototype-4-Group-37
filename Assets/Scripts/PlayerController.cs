@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     [Header("Tilemaps")]
     public Tilemap wallTilemap;
     public Tilemap obstacleTilemap;
+    public Tilemap waterTilemap; // new reference to water
 
     [Header("Animation")]
     public Animator animator;
@@ -87,7 +88,8 @@ public class PlayerController : MonoBehaviour
     {
         bool wallBlocked = wallTilemap != null && wallTilemap.HasTile(cell);
         bool obstacleBlocked = obstacleTilemap != null && obstacleTilemap.HasTile(cell);
-        return wallBlocked || obstacleBlocked;
+        bool waterBlocked = waterTilemap != null && waterTilemap.HasTile(cell); // new water check
+        return wallBlocked || obstacleBlocked || waterBlocked;
     }
 
     public Vector3Int GetCellPosition()
@@ -132,7 +134,6 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
-
 
     public void PlayThrow(Vector3Int dir)
     {

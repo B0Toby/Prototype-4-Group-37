@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.Audio;
 using UnityEngine.Tilemaps;
 using System.Collections;
 using System.Collections.Generic;
@@ -43,7 +42,7 @@ public class Parrot : BaseAnimal
 
         Vector3Int nextCell = cellPos + dir;
 
-        if (IsWall(nextCell) || IsObstacle(nextCell))
+        if (IsWall(nextCell) || IsObstacle(nextCell) || IsWater(nextCell))
         {
             return;
         }

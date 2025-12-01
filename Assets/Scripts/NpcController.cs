@@ -18,6 +18,7 @@ public class NpcController : MonoBehaviour
     [Header("Tilemaps")]
     public Tilemap wallTilemap;
     public Tilemap obstacleTilemap;
+    public Tilemap waterTilemap;
 
     [Header("Sprites")]
     public Sprite idleSprite;
