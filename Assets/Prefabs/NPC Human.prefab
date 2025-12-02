@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7741757119017046504}
   - component: {fileID: 2357059866249975172}
   - component: {fileID: 2326904445670495539}
+  - component: {fileID: 116414833673457211}
   m_Layer: 0
   m_Name: NPC Human
   m_TagString: Untagged
@@ -105,12 +106,13 @@ MonoBehaviour:
   grid: {fileID: 0}
   wallTilemap: {fileID: 0}
   obstacleTilemap: {fileID: 0}
+  waterTilemap: {fileID: 0}
   idleSprite: {fileID: 1426666553488855073, guid: ec421cf0cf0df3e439729a631b932f62, type: 3}
   rageSprite: {fileID: 4807775697852972887, guid: 3c11ef87803636c4b837aa813ad88f7a, type: 3}
   uiCanvas: {fileID: 0}
   rageTurnCounterPrefab: {fileID: 2075828536486426018, guid: ccc20303ee4f864448d732f716fd9308, type: 3}
   rageLoopClip: {fileID: 8300000, guid: d03c4c161b9bf114d877774b2e3253e9, type: 3}
-  animator: {fileID: 0}
+  animator: {fileID: 116414833673457211}
   state: 0
 --- !u!61 &2357059866249975172
 BoxCollider2D:
@@ -255,3 +257,25 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!95 &116414833673457211
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2558366695785737764}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 589e4d00ea603164da1cc3ed5ba9549e, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

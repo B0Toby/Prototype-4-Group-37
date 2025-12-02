@@ -11,11 +11,11 @@ GameObject:
   - component: {fileID: 1853361031123850249}
   - component: {fileID: 6142931287556957367}
   - component: {fileID: 4622102579231004127}
-  - component: {fileID: 5837786984555969037}
-  - component: {fileID: 7185518525987991657}
-  - component: {fileID: -415354690099332635}
+  - component: {fileID: 5722772999472575123}
+  - component: {fileID: -3179122834863951975}
+  - component: {fileID: 3152129665574594276}
   m_Layer: 10
-  m_Name: AnimalPig
+  m_Name: AnimalTurtle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 221625662963821887}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -74,7 +74,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.8, y: 0.8}
+    oldSize: {x: 0.9142857, y: 0.9142857}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -126,7 +126,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -8086054807189118127, guid: c48f215e9d8eb7e418991c7812e5b8a4, type: 3}
+  m_Sprite: {fileID: -6330902930413198508, guid: 4af1280e0b1b2dd468372dad7c3ac058, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -137,7 +137,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &5837786984555969037
+--- !u!114 &5722772999472575123
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -146,40 +146,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 221625662963821887}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 613b440f0bdd5294c90253c47a7ec1ac, type: 3}
+  m_Script: {fileID: 11500000, guid: 3c3d6b3aed29cac47ab47e9a3a55df2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bounce: 1
-  pigAudioSource: {fileID: -415354690099332635}
-  pigClips:
-  - {fileID: 8300000, guid: d2a891b5f2ba6a5499e6dde8f7fdf207, type: 3}
-  - {fileID: 8300000, guid: 743f4a80db1b7454eb04885eb1ce1752, type: 3}
-  minOinkDelay: 3
-  maxOinkDelay: 10
-  animator: {fileID: 7185518525987991657}
---- !u!95 &7185518525987991657
-Animator:
-  serializedVersion: 7
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 221625662963821887}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 1affbbeba01fc3f45a02a85b667c28ef, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
---- !u!82 &-415354690099332635
+  bounce: 0
+  animator: {fileID: 3152129665574594276}
+  bridgeSprite: {fileID: 2066510742272872450, guid: 4af1280e0b1b2dd468372dad7c3ac058, type: 3}
+  pacifyMoveInterval: 2
+--- !u!82 &-3179122834863951975
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -191,7 +165,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -276,3 +250,25 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!95 &3152129665574594276
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 221625662963821887}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: bd2b8c9ee2b402c4f95d53f0bdfe2a1d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e64ba64e868cae843a01aa29a300b56b, type: 3}
-  m_Name: CrabPotion
+  m_Name: TurtlePotion
   m_EditorClassIdentifier: 
-  potionName: Crab Potion
-  iconSprite: {fileID: -4943206277110449413, guid: 30e1ce937565e5544abe727491e0c1f2, type: 3}
-  potionPrefab: {fileID: 5150402214769740356, guid: 22b8cb32ea04ff543a926d3272d323d1, type: 3}
-  animalPrefab: {fileID: 221625662963821887, guid: 5153f8fd4929c58458796ad6a02711f9, type: 3}
-  rageTurns: 3
+  potionName: Turtle Potion
+  iconSprite: {fileID: -7974086900495990185, guid: ea279dd6cbc07f74ca084d11fe18c5f4, type: 3}
+  potionPrefab: {fileID: 4175227505549607372, guid: 01ad1991b1935b24abcb0a66463f205f, type: 3}
+  animalPrefab: {fileID: 221625662963821887, guid: 318b3917dec102543a61da1ef7d3c1be, type: 3}
+  rageTurns: 2
   moveInterval: 2
   minRange: 1
-  maxRange: 3
+  maxRange: 5
