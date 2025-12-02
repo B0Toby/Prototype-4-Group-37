@@ -4013,6 +4013,10 @@ PrefabInstance:
       propertyPath: obstacleTilemap
       value: 
       objectReference: {fileID: 1692514}
+    - target: {fileID: 8907083191350044368, guid: 8bd6411edf6b83b40be08f9140dc3389, type: 3}
+      propertyPath: m_SortingOrder
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
