@@ -31,6 +31,7 @@ public class Crab : BaseAnimal
         behaviorNote = "Moves only left & right\r\nBreaks obstacles in its path";
 
         waterTilemap = GameObject.Find("Tilemap_Water")?.GetComponent<Tilemap>();
+
     }
 
     // step functions mostly copied over from original npc controller

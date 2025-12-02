@@ -27,20 +27,18 @@ public class Pig : BaseAnimal
     private void Awake()
     {
         animalName = "Pig";
-        behaviorNote = "Other animals will bounce off of it";
+        behaviorNote = "Some animals will bounce off of it";
         bounce = true;
 
         if (animator == null)
             animator = GetComponent<Animator>();
 
         sr = GetComponent<SpriteRenderer>();
-    }
 
-    private void Start()
-    {
         if (pigAudioSource != null && pigClips.Length > 0)
             StartCoroutine(PigNoiseRoutine());
     }
+    
 
     private IEnumerator PigNoiseRoutine()
     {
@@ -85,6 +83,7 @@ public class Pig : BaseAnimal
 
     public override void OnPlayerStep()
     {
+        Debug.Log("Pig cell = " + this.GetCellPosition());
         if (GameManager.I == null)
             return;
 
@@ -94,6 +93,7 @@ public class Pig : BaseAnimal
             return;
 
         PlayWalk(dir);
+        
     }
 
     private void PlayWalk(Vector3Int dir)

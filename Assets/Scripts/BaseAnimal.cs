@@ -13,7 +13,7 @@ public abstract class BaseAnimal : MonoBehaviour, TooltipInterface
     protected string behaviorNote;
     public bool bounce = false;
 
-    private void Start()
+    protected void Start()
     {
         GameManager.I.RegisterAnimal(this);
     }
@@ -27,6 +27,7 @@ public abstract class BaseAnimal : MonoBehaviour, TooltipInterface
 
         cellPos = npc.GetCellPosition();
         transform.position = grid.GetCellCenterWorld(cellPos);
+
     }
 
     // movement logic when pacified
@@ -56,11 +57,17 @@ public abstract class BaseAnimal : MonoBehaviour, TooltipInterface
 
     protected BaseAnimal GetAnimalAtCell(Vector3Int c)
     {
+        Debug.Log("Checking cell: " + c);
+
         foreach (var a in GameManager.I.animals)
         {
             if (a != this && a.GetCellPosition() == c)
+            { 
+                Debug.Log("HIT "+a.animalName + " at " + a.GetCellPosition());
                 return a;
+            }
         }
+        Debug.Log("No animal found at " + c);
         return null;
     }
 
