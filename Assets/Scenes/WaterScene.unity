@@ -336,6 +336,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 867657406}
     - target: {fileID: 7741757119017046504, guid: fe97a495f30177445adf04e3b85bc72e, type: 3}
+      propertyPath: waterTilemap
+      value: 
+      objectReference: {fileID: 941956628}
+    - target: {fileID: 7741757119017046504, guid: fe97a495f30177445adf04e3b85bc72e, type: 3}
       propertyPath: obstacleTilemap
       value: 
       objectReference: {fileID: 1841081907}
@@ -2067,7 +2071,7 @@ Tilemap:
       - {fileID: -9087784039369370833, guid: dead6693899ca0a4994ffbd605c4dd75, type: 3}
       - {fileID: -1289325417, guid: dead6693899ca0a4994ffbd605c4dd75, type: 3}
       - {fileID: 1261033843, guid: dead6693899ca0a4994ffbd605c4dd75, type: 3}
-      m_AnimationSpeed: 3.0000002
+      m_AnimationSpeed: 3
       m_AnimationTimeOffset: 0
       m_Flags: 16
   - first: {x: -3, y: 2, z: 0}
@@ -2077,7 +2081,7 @@ Tilemap:
       - {fileID: -9087784039369370833, guid: dead6693899ca0a4994ffbd605c4dd75, type: 3}
       - {fileID: -1289325417, guid: dead6693899ca0a4994ffbd605c4dd75, type: 3}
       - {fileID: 1261033843, guid: dead6693899ca0a4994ffbd605c4dd75, type: 3}
-      m_AnimationSpeed: 3.0000002
+      m_AnimationSpeed: 3
       m_AnimationTimeOffset: 0
       m_Flags: 16
   m_TileAssetArray:
@@ -4016,6 +4020,7 @@ MonoBehaviour:
   playerController: {fileID: 0}
   potions:
   - {fileID: 11400000, guid: d8b80584dc30f0d4db9d34f7924ac7e9, type: 2}
+  - {fileID: 11400000, guid: e7915c9b79e44c14fb50786bdd5a287d, type: 2}
   travelTime: 0.5
   throwSFX: {fileID: 8300000, guid: de9b7cf7b7fc8f34eb0c1dadf6376e04, type: 3}
   audioSource: {fileID: 1284206599}
@@ -4034,6 +4039,7 @@ MonoBehaviour:
   grid: {fileID: 242035389}
   wallTilemap: {fileID: 867657406}
   obstacleTilemap: {fileID: 1841081907}
+  waterTilemap: {fileID: 941956628}
   animator: {fileID: 0}
 --- !u!212 &1284206602
 SpriteRenderer:
