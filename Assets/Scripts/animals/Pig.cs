@@ -1,12 +1,20 @@
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.InputSystem.XR;
+using System.Collections;
 
 public class Pig : BaseAnimal
 {
     //[Header("Audio")]
     //private AudioSource audioSource;
     //public AudioClip bounceClip;
+
+    [Header("Audio")]
+    public AudioSource pigAudioSource;
+    public AudioClip[] pigClips;
+    [Header("Pig Noise Timing")]
+    public float minOinkDelay = 3f;
+    public float maxOinkDelay = 10f;
 
     [Header("Animation")]
     public Animator animator;
@@ -26,6 +34,29 @@ public class Pig : BaseAnimal
             animator = GetComponent<Animator>();
 
         sr = GetComponent<SpriteRenderer>();
+    }
+
+    private void Start()
+    {
+        if (pigAudioSource != null && pigClips.Length > 0)
+            StartCoroutine(PigNoiseRoutine());
+    }
+
+    private IEnumerator PigNoiseRoutine()
+    {
+        while (true)
+        {
+            float wait = Random.Range(minOinkDelay, maxOinkDelay);
+            yield return new WaitForSeconds(wait);
+
+            AudioClip clip = pigClips[Random.Range(0, pigClips.Length)];
+
+            // random pitch/volume for variety
+            pigAudioSource.pitch = 1f + Random.Range(-0.05f, 0.05f);
+            float volume = Random.Range(0.2f, 0.5f);
+
+            pigAudioSource.PlayOneShot(clip, volume);
+        }
     }
 
     // copied from crab, adjust in a minute maybe
