@@ -20,9 +20,7 @@ public class Pig : BaseAnimal
     public Animator animator;
     private SpriteRenderer sr;
 
-    private static readonly int HashDoWalkSide = Animator.StringToHash("DoWalkSide");
-    private static readonly int HashDoWalkUp   = Animator.StringToHash("DoWalkUp");
-    private static readonly int HashDoWalkDown = Animator.StringToHash("DoWalkDown");
+    private static readonly int HashDoBounce = Animator.StringToHash("DoBounce");
 
     private void Awake()
     {
@@ -86,41 +84,22 @@ public class Pig : BaseAnimal
         Debug.Log("Pig cell = " + this.GetCellPosition());
         if (GameManager.I == null)
             return;
-
-        Vector3Int dir = GameManager.I.lastPlayerMoveDir;
-
-        if (dir == Vector3Int.zero)
-            return;
-
-        PlayWalk(dir);
-        
     }
 
-    private void PlayWalk(Vector3Int dir)
+    public override void OnBounced(Vector3Int fromDir)
     {
-        if (animator == null) return;
-
-        animator.ResetTrigger(HashDoWalkSide);
-        animator.ResetTrigger(HashDoWalkUp);
-        animator.ResetTrigger(HashDoWalkDown);
-
-        if (dir.y > 0)
+        if (animator != null)
         {
-            animator.SetTrigger(HashDoWalkUp);
+            animator.ResetTrigger(HashDoBounce);
+            animator.SetTrigger(HashDoBounce);
         }
-        else if (dir.y < 0)
-        {
-            animator.SetTrigger(HashDoWalkDown);
-        }
-        else
-        {
-            animator.SetTrigger(HashDoWalkSide);
 
-            if (sr != null)
-            {
-                if (dir.x > 0) sr.flipX = true;
-                else if (dir.x < 0) sr.flipX = false;
-            }
+        if (pigAudioSource != null && pigClips.Length > 0)
+        {
+            AudioClip clip = pigClips[Random.Range(0, pigClips.Length)];
+            pigAudioSource.pitch = 1f + Random.Range(-0.1f, 0.1f);
+            float volume = Random.Range(0.4f, 0.7f);
+            pigAudioSource.PlayOneShot(clip, volume);
         }
     }
 }

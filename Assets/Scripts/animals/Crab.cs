@@ -31,7 +31,6 @@ public class Crab : BaseAnimal
         behaviorNote = "Moves only left & right\r\nBreaks obstacles in its path";
 
         waterTilemap = GameObject.Find("Tilemap_Water")?.GetComponent<Tilemap>();
-
     }
 
     // step functions mostly copied over from original npc controller
@@ -53,6 +52,8 @@ public class Crab : BaseAnimal
         {
             if (hitAnimal.bounce)
             {
+                hitAnimal.OnBounced(step);
+
                 Vector3Int bounceCell = npcCell - step;
                 if (GetAnimalAtCell(bounceCell) == null)
                     nextCell = bounceCell;
@@ -85,6 +86,8 @@ public class Crab : BaseAnimal
         {
             if (hitAnimal.bounce)
             {
+                hitAnimal.OnBounced(moveDir);
+
                 if (moveDir == Vector3Int.left || moveDir == Vector3Int.right)
                 {
                     moveDir = (Random.value < 0.5f) ? Vector3Int.up : Vector3Int.down;

@@ -36,6 +36,12 @@ public abstract class BaseAnimal : MonoBehaviour, TooltipInterface
     // movement logic when enraged
     public abstract Vector3Int RageStep(NpcController npc);
 
+    // called when another animal "bounces" off this one
+    public virtual void OnBounced(Vector3Int fromDir)
+    {
+        // default: no special reaction
+    }
+
     // use if animal should follow player ever
     protected Vector3Int GetStepToward(Vector3Int start, Vector3Int target)
     {
