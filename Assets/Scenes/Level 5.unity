@@ -2135,7 +2135,7 @@ Tilemap:
       - {fileID: 167037294558086049, guid: 19546a028dc77704f8177b69f2a6ed10, type: 3}
       - {fileID: 2513813214299261534, guid: 19546a028dc77704f8177b69f2a6ed10, type: 3}
       - {fileID: -8561662247366449510, guid: 19546a028dc77704f8177b69f2a6ed10, type: 3}
-      m_AnimationSpeed: 3.0000002
+      m_AnimationSpeed: 3
       m_AnimationTimeOffset: 0
       m_Flags: 16
   - first: {x: -2, y: -1, z: 0}
@@ -2185,7 +2185,7 @@ Tilemap:
       - {fileID: 167037294558086049, guid: 19546a028dc77704f8177b69f2a6ed10, type: 3}
       - {fileID: 2513813214299261534, guid: 19546a028dc77704f8177b69f2a6ed10, type: 3}
       - {fileID: -8561662247366449510, guid: 19546a028dc77704f8177b69f2a6ed10, type: 3}
-      m_AnimationSpeed: 3.0000002
+      m_AnimationSpeed: 3
       m_AnimationTimeOffset: 0
       m_Flags: 16
   m_TileAssetArray:
@@ -3635,6 +3635,83 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!1001 &1043245981
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2558366695785737764, guid: fe97a495f30177445adf04e3b85bc72e, type: 3}
+      propertyPath: m_Name
+      value: NPC Human (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5778346518124581951, guid: fe97a495f30177445adf04e3b85bc72e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5778346518124581951, guid: fe97a495f30177445adf04e3b85bc72e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5778346518124581951, guid: fe97a495f30177445adf04e3b85bc72e, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5778346518124581951, guid: fe97a495f30177445adf04e3b85bc72e, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5778346518124581951, guid: fe97a495f30177445adf04e3b85bc72e, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5778346518124581951, guid: fe97a495f30177445adf04e3b85bc72e, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5778346518124581951, guid: fe97a495f30177445adf04e3b85bc72e, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5778346518124581951, guid: fe97a495f30177445adf04e3b85bc72e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5778346518124581951, guid: fe97a495f30177445adf04e3b85bc72e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5778346518124581951, guid: fe97a495f30177445adf04e3b85bc72e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7741757119017046504, guid: fe97a495f30177445adf04e3b85bc72e, type: 3}
+      propertyPath: grid
+      value: 
+      objectReference: {fileID: 242035389}
+    - target: {fileID: 7741757119017046504, guid: fe97a495f30177445adf04e3b85bc72e, type: 3}
+      propertyPath: uiCanvas
+      value: 
+      objectReference: {fileID: 771746728}
+    - target: {fileID: 7741757119017046504, guid: fe97a495f30177445adf04e3b85bc72e, type: 3}
+      propertyPath: wallTilemap
+      value: 
+      objectReference: {fileID: 867657406}
+    - target: {fileID: 7741757119017046504, guid: fe97a495f30177445adf04e3b85bc72e, type: 3}
+      propertyPath: waterTilemap
+      value: 
+      objectReference: {fileID: 941956628}
+    - target: {fileID: 7741757119017046504, guid: fe97a495f30177445adf04e3b85bc72e, type: 3}
+      propertyPath: obstacleTilemap
+      value: 
+      objectReference: {fileID: 1841081907}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: fe97a495f30177445adf04e3b85bc72e, type: 3}
 --- !u!1 &1077703072
 GameObject:
   m_ObjectHideFlags: 0
@@ -5096,6 +5173,83 @@ Transform:
   m_Children: []
   m_Father: {fileID: 242035388}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1897507215
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2558366695785737764, guid: fe97a495f30177445adf04e3b85bc72e, type: 3}
+      propertyPath: m_Name
+      value: NPC Human (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5778346518124581951, guid: fe97a495f30177445adf04e3b85bc72e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 3.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5778346518124581951, guid: fe97a495f30177445adf04e3b85bc72e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5778346518124581951, guid: fe97a495f30177445adf04e3b85bc72e, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5778346518124581951, guid: fe97a495f30177445adf04e3b85bc72e, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5778346518124581951, guid: fe97a495f30177445adf04e3b85bc72e, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5778346518124581951, guid: fe97a495f30177445adf04e3b85bc72e, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5778346518124581951, guid: fe97a495f30177445adf04e3b85bc72e, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5778346518124581951, guid: fe97a495f30177445adf04e3b85bc72e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5778346518124581951, guid: fe97a495f30177445adf04e3b85bc72e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5778346518124581951, guid: fe97a495f30177445adf04e3b85bc72e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7741757119017046504, guid: fe97a495f30177445adf04e3b85bc72e, type: 3}
+      propertyPath: grid
+      value: 
+      objectReference: {fileID: 242035389}
+    - target: {fileID: 7741757119017046504, guid: fe97a495f30177445adf04e3b85bc72e, type: 3}
+      propertyPath: uiCanvas
+      value: 
+      objectReference: {fileID: 771746728}
+    - target: {fileID: 7741757119017046504, guid: fe97a495f30177445adf04e3b85bc72e, type: 3}
+      propertyPath: wallTilemap
+      value: 
+      objectReference: {fileID: 867657406}
+    - target: {fileID: 7741757119017046504, guid: fe97a495f30177445adf04e3b85bc72e, type: 3}
+      propertyPath: waterTilemap
+      value: 
+      objectReference: {fileID: 941956628}
+    - target: {fileID: 7741757119017046504, guid: fe97a495f30177445adf04e3b85bc72e, type: 3}
+      propertyPath: obstacleTilemap
+      value: 
+      objectReference: {fileID: 1841081907}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: fe97a495f30177445adf04e3b85bc72e, type: 3}
 --- !u!224 &1983233054 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8118765319166052065, guid: dab83be01fb26e1478d45a7e3ee7699d, type: 3}
@@ -5168,3 +5322,5 @@ SceneRoots:
   - {fileID: 1557058296}
   - {fileID: 1284206603}
   - {fileID: 782167162}
+  - {fileID: 1043245981}
+  - {fileID: 1897507215}
