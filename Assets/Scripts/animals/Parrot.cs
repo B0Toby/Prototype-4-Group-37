@@ -1,7 +1,8 @@
-using UnityEngine;
-using UnityEngine.Tilemaps;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.Tilemaps;
 
 public class Parrot : BaseAnimal
 {
@@ -9,6 +10,8 @@ public class Parrot : BaseAnimal
     public Animator animator;
 
     private SpriteRenderer sr;
+
+    private bool mirrored = false;
 
     private static readonly int HashDoWalkSide = Animator.StringToHash("DoWalkSide");
     private static readonly int HashDoWalkUp   = Animator.StringToHash("DoWalkUp");
@@ -36,6 +39,20 @@ public class Parrot : BaseAnimal
             return;
 
         Vector3Int dir = GameManager.I.lastPlayerMoveDir;
+
+        BaseAnimal hitAnimal = GetAnimalAtCell(cellPos + dir);
+        if (hitAnimal != null)
+        {
+            if (hitAnimal.bounce)
+            {
+                mirrored = true;
+            }
+        }
+
+        if (mirrored == true)
+        {
+            dir = -dir;
+        }
 
         if (dir == Vector3Int.zero)
             return;
