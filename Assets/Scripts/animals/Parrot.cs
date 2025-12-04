@@ -45,7 +45,7 @@ public class Parrot : BaseAnimal
         {
             if (hitAnimal.bounce)
             {
-                mirrored = true;
+                mirrored = !mirrored;
             }
         }
 

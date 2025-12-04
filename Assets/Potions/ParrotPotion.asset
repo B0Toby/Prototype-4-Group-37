@@ -19,4 +19,4 @@ MonoBehaviour:
   rageTurns: 4
   moveInterval: 1
   minRange: 1
-  maxRange: 3
+  maxRange: 6
