@@ -27,6 +27,8 @@ public class Turtle : BaseAnimal
         animalName   = "Turtle";
         behaviorNote = "Moves toward player\nCreates a bridge on water";
 
+
+
         if (animator == null)
             animator = GetComponent<Animator>();
 

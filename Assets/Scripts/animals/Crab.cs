@@ -61,13 +61,13 @@ public class Crab : BaseAnimal
         }
 
         // walls and obstacles both block in rage phase
-        if (IsWall(nextCell) || IsObstacle(nextCell))
+        if (npc.IsWall(nextCell) || npc.IsObstacle(nextCell))
         {
             return npcCell;
         }
 
         // water blocks crab only if it cannot traverse water
-        if (IsWater(nextCell) && !CanTraverseWater)
+        if (npc.IsWater(nextCell) && !CanTraverseWater)
         {
             return npcCell;
         }

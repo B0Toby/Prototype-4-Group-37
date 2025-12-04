@@ -25,7 +25,7 @@ public class Pig : BaseAnimal
     private void Awake()
     {
         animalName = "Pig";
-        behaviorNote = "Some animals will bounce off of it";
+        behaviorNote = "Crabs and Parrots will bounce off of it";
         bounce = true;
 
         if (animator == null)
@@ -70,8 +70,8 @@ public class Pig : BaseAnimal
 
         Vector3Int nextCell = npcCell + step;
 
-        // walls and obstacles both block in rage phase
-        if (IsWall(nextCell) || IsObstacle(nextCell))
+        // walls, obstacles, water block in rage phase
+        if (npc.IsWater(nextCell) || npc.IsWall(nextCell) || npc.IsObstacle(nextCell))
         {
             return npcCell;
         }
@@ -81,7 +81,6 @@ public class Pig : BaseAnimal
 
     public override void OnPlayerStep()
     {
-        Debug.Log("Pig cell = " + this.GetCellPosition());
         if (GameManager.I == null)
             return;
     }

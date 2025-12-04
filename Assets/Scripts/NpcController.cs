@@ -236,14 +236,20 @@ public class NpcController : MonoBehaviour
         return Vector3Int.zero;
     }
 
-    private bool IsWall(Vector3Int cell)
+    public bool IsWall(Vector3Int cell)
     {
         return wallTilemap != null && wallTilemap.HasTile(cell);
     }
 
-    private bool IsObstacle(Vector3Int cell)
+    public bool IsObstacle(Vector3Int cell)
     {
         return obstacleTilemap != null && obstacleTilemap.HasTile(cell);
+    }
+
+    public bool IsWater(Vector3Int cell)
+    {
+        return waterTilemap != null && waterTilemap.HasTile(cell);
+
     }
 
     public Vector3Int GetCellPosition()
