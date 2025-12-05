@@ -46,6 +46,7 @@ public class Parrot : BaseAnimal
             if (hitAnimal.bounce)
             {
                 mirrored = !mirrored;
+                hitAnimal.OnBounced(dir);
             }
         }
 
