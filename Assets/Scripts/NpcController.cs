@@ -110,7 +110,7 @@ public class NpcController : MonoBehaviour
         animalPrefab = potion.animalPrefab;
         animalData = animalPrefab.GetComponent<BaseAnimal>();
 
-        if (state == NpcState.Pacify)
+        if (state == NpcState.Pacify || state == NpcState.Rage)
             return;
 
         state = NpcState.Rage;
