@@ -1,5 +1,7 @@
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using System.Collections;
+using System.Collections.Generic;
 
 public abstract class BaseAnimal : MonoBehaviour, TooltipInterface
 {
@@ -13,13 +15,40 @@ public abstract class BaseAnimal : MonoBehaviour, TooltipInterface
     protected string behaviorNote;
     public bool bounce = false;
 
+    private bool initializedFromNpc = false;
+
     protected void Start()
     {
+        if (!initializedFromNpc)
+        {
+            if (grid == null)
+                grid = FindFirstObjectByType<Grid>();
+
+            if (wallTilemap == null || obstacleTilemap == null || waterTilemap == null)
+            {
+                var npc = FindFirstObjectByType<NpcController>();
+                if (npc != null)
+                {
+                    if (wallTilemap == null)      wallTilemap      = npc.wallTilemap;
+                    if (obstacleTilemap == null)  obstacleTilemap  = npc.obstacleTilemap;
+                    if (waterTilemap == null)     waterTilemap     = npc.waterTilemap;
+                }
+            }
+
+            if (grid != null)
+            {
+                cellPos = grid.WorldToCell(transform.position);
+                transform.position = grid.GetCellCenterWorld(cellPos);
+            }
+        }
+
         GameManager.I.RegisterAnimal(this);
     }
 
     public virtual void InitializeFromNpc(NpcController npc)
     {
+        initializedFromNpc = true;
+
         grid = npc.grid;
         wallTilemap = npc.wallTilemap;
         obstacleTilemap = npc.obstacleTilemap;
@@ -27,7 +56,6 @@ public abstract class BaseAnimal : MonoBehaviour, TooltipInterface
 
         cellPos = npc.GetCellPosition();
         transform.position = grid.GetCellCenterWorld(cellPos);
-
     }
 
     // movement logic when pacified
